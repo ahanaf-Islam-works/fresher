@@ -52,36 +52,32 @@ This application is designed to track job postings from specific companies and n
 
 ## Key Components
 
--NgRx for state-management
--Tailwind, Angular Material and PrimeNG for UI
--MySQL: Database for the API Gateway, running on port 3306.
--MongoDB: NoSQL database for microservices, running on port 27017.
--RabbitMQ: Message broker for inter-service communication, running on ports 5672 and 15672.
--Kafka and Zookeeper: Event streaming platform used for sending job update events, -running on ports 9092, 29092 (Kafka) and 2181 (Zookeeper).
--Grafana Stack: For monitoring, logging, and distributed tracing:
--Prometheus (Metrics): Port 9090
--Loki (Logs): Port 3100
--Tempo (Tracing): Port 9411
--Grafana (Visualization): Port 3000
+- NgRx for state-management
+- Tailwind, Angular Material and PrimeNG for UI
+- MySQL: Database for the API Gateway, running on port 3306.
+- MongoDB: NoSQL database for microservices, running on port 27017.
+- RabbitMQ: Message broker for inter-service communication, running on ports 5672 and 15672.
+- Kafka and Zookeeper: Event streaming platform used for sending job update events, -running on ports 9092, 29092 (Kafka) and 2181 (Zookeeper).
+- Grafana Stack: For monitoring, logging, and distributed tracing:
+- Prometheus (Metrics): Port 9090
+- Loki (Logs): Port 3100
+- Tempo (Tracing): Port 9411
+- Grafana (Visualization): Port 3000
 
 ## Setup and Installation
 
--Clone the repository and navigate to the project directory.
-
--Set up Docker and Docker Compose on your machine.
--Run the following command to start all services:
--bash
--Copy code
--docker-compose up -d
--Access the following services on your browser:
--Grafana: http://localhost:3000
--Kafka UI: http://localhost:8086
--Prometheus: http://localhost:9090
--RabbitMQ: http://localhost:15672
-
-## Frontend
-
-The frontend is built using Angular. It interacts with the API Gateway for authentication, session management, and job updates.
+- Clone the repository and navigate to the project directory.
+- Run ng serve for frontend
+- Set up Docker and Docker Compose on your machine.
+- Run the following command to start all services:
+- bash
+- Copy code
+- docker-compose up -d
+- Access the following services on your browser:
+- Grafana: http://localhost:3000
+- Kafka UI: http://localhost:8086
+- Prometheus: http://localhost:9090
+- RabbitMQ: http://localhost:15672
 
 ## Contributing
 
