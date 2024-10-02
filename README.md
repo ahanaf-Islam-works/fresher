@@ -70,8 +70,6 @@ This application is designed to track job postings from specific companies and n
 - Run ng serve for frontend
 - Set up Docker and Docker Compose on your machine.
 - Run the following command to start all services:
-- bash
-- Copy code
 - docker-compose up -d
 - Access the following services on your browser:
 - Grafana: http://localhost:3000
