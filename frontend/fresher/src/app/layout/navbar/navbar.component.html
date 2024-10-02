@@ -1,0 +1,61 @@
+<header
+  class="flex shadow-lg py-4 px-4 sm:px-10 bg-white font-[sans-serif] min-h-[70px] tracking-wide relative z-50"
+>
+  <div>
+    <ul>
+      <li
+        class="mb-6 max-lg:block text-black"
+        *ngFor="let pageLink of pagesLinks"
+      >
+        <a
+          routerLink="{{ pageLink.link }}"
+          class="text-[#007bff] hover:underline"
+        >
+          {{ pageLink.name }}
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="flex flex-wrap items-center justify-between gap-4 w-full">
+    <a
+      class="lg:absolute max-lg:left-10 lg:top-2/4 lg:left-2/4 lg:-translate-x-1/2 lg:-translate-y-1/2 text-white dark:text-gray-900 text-2xl font-bold"
+      routerLink="/"
+    >
+      Logo
+    </a>
+  </div>
+
+  <div class="flex items-center ml-auto space-x-6">
+    <button
+      class="font-semibold text-[15px] border-none outline-none"
+      *ngFor="let pageLink of sessionLinks"
+    >
+      <a
+        routerLink="{{ pageLink.link }}"
+        class="text-[#007bff] hover:underline"
+      >
+        {{ pageLink.name }}
+      </a>
+    </button>
+    <button
+      class="font-semibold text-[15px] border-none outline-none text-black"
+      (click)="onLogout()"
+    >
+      logout
+    </button>
+    <button id="toggleOpen" class="lg:hidden">
+      <svg
+        class="w-7 h-7"
+        fill="#333"
+        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+          clip-rule="evenodd"
+        ></path>
+      </svg>
+    </button>
+  </div>
+</header>
