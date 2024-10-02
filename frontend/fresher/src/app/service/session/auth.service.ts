@@ -1,52 +1,44 @@
-import { Injectable, inject, signal } from '@angular/core';
-import { SignUpFormType, UserSessionDetails } from '@app/types/auth/AuthTypes';
-import { RestService } from '../api/rest.service';
+import { Injectable, inject } from "@angular/core";
+import { loadUserSession, login, logout } from "@app/store/auth.actions";
+import { AuthState } from "@app/store/auth.reducer";
+import { SignUpFormType, UserSessionDetails } from "@app/types/auth/AuthTypes";
+import { Store } from "@ngrx/store";
+import { RestService } from "../api/rest.service";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthService {
   private apiService = inject(RestService);
-
-  private sessionDetails: UserSessionDetails | null = null;
-
-  public loggedIn = signal<boolean>(false);
+  private store = inject(Store<AuthState>);
 
   public signUpService(signUpFormData: SignUpFormType) {
-    return this.apiService.post('/auth/sign-up', signUpFormData);
+    return this.apiService.post("/auth/sign-up", signUpFormData);
   }
 
   public signInService(signInFormData: { email: string; password: string }) {
-    return this.apiService.post('/auth/sign-in', signInFormData);
+    return this.apiService.post("/auth/sign-in", signInFormData);
   }
 
   public saveSessionDetails(sessionDetails: UserSessionDetails, token: string) {
-    console.log(sessionDetails);
-    this.loggedIn.set(true);
-    console.log(this.loggedIn());
-    localStorage.setItem('userSessionDetails', JSON.stringify(sessionDetails));
-    sessionStorage.setItem('token', token);
-  }
-
-  public getSessionDetails() {
-    this.sessionDetails = JSON.parse(
-      localStorage.getItem('sessionDetails') || '',
-    );
-    if (this.sessionDetails && this.loggedIn()) {
-      return this.sessionDetails;
-    } else {
-      return null;
-    }
-  }
-
-  public getToken() {
-    return JSON.parse(sessionStorage.getItem('token') || '') as string;
+    this.store.dispatch(login({ sessionDetails, token }));
+    localStorage.setItem("userSessionDetails", JSON.stringify(sessionDetails));
+    sessionStorage.setItem("token", token);
   }
 
   public logOut() {
-    console.log(this.loggedIn());
-    this.loggedIn.set(false);
-    localStorage.removeItem('userSessionDetails');
-    sessionStorage.removeItem('token');
+    this.store.dispatch(logout());
+    localStorage.removeItem("userSessionDetails");
+    sessionStorage.removeItem("token");
+  }
+
+  public getSessionDetails() {
+    const sessionDetails = JSON.parse(
+      localStorage.getItem("userSessionDetails") || ""
+    );
+    if (sessionDetails) {
+      this.store.dispatch(loadUserSession({ sessionDetails }));
+    }
+    return sessionDetails;
   }
 }
